@@ -331,6 +331,55 @@ func (q *QRCode) Image(size int) image.Image {
 	return img
 }
 
+// ImageRGB returns the QR Code as an RGB image.Image.
+//
+// Do same thing with Image() but as RGB format, not black-white.
+func (q *QRCode) ImageRGB(size int) image.Image {
+	// Build QR code.
+	q.encode()
+
+	// Minimum pixels (both width and height) required.
+	realSize := q.symbol.size
+
+	// Variable size support.
+	if size < 0 {
+		size = size * -1 * realSize
+	}
+
+	// Actual pixels available to draw the symbol. Automatically increase the
+	// image size if it's not large enough.
+	if size < realSize {
+		size = realSize
+	}
+
+	// Output image.
+	rect := image.Rectangle{Min: image.Point{0, 0}, Max: image.Point{size, size}}
+
+	img := image.NewRGBA(rect)
+
+	// QR code bitmap.
+	bitmap := q.symbol.bitmap()
+
+	// Map each image pixel to the nearest QR code module.
+	modulesPerPixel := float64(realSize) / float64(size)
+	for y := 0; y < size; y++ {
+		y2 := int(float64(y) * modulesPerPixel)
+		for x := 0; x < size; x++ {
+			x2 := int(float64(x) * modulesPerPixel)
+
+			v := bitmap[y2][x2]
+
+			if v {
+				img.Set(x, y, q.ForegroundColor)
+			} else {
+				img.Set(x, y, q.BackgroundColor)
+			}
+		}
+	}
+
+	return img
+}
+
 // PNG returns the QR Code as a PNG image.
 //
 // size is both the image width and height in pixels. If size is too small then
