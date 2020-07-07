@@ -10,13 +10,13 @@ Each QR Code contains error recovery information to aid reading damaged or obscu
 
 ## Install
 
-    go get -u github.com/skip2/go-qrcode/...
+    go get -u github.com/daangn/go-qrcode/...
 
 A command-line tool `qrcode` will be built into `$GOPATH/bin/`.
 
 ## Usage
 
-    import qrcode "github.com/skip2/go-qrcode"
+    import qrcode "github.com/daangn/go-qrcode"
 
 - **Create a 256x256 PNG image:**
 
@@ -35,7 +35,7 @@ All examples use the qrcode.Medium error Recovery Level and create a fixed 256x2
 
 ## Documentation
 
-[![godoc](https://godoc.org/github.com/skip2/go-qrcode?status.png)](https://godoc.org/github.com/skip2/go-qrcode)
+[![godoc](https://godoc.org/github.com/daangn/go-qrcode?status.png)](https://godoc.org/github.com/daangn/go-qrcode)
 
 ## Demoapp
 
@@ -47,7 +47,7 @@ A command-line tool `qrcode` will be built into `$GOPATH/bin/`.
 
 ```
 qrcode -- QR Code encoder in Go
-https://github.com/skip2/go-qrcode
+https://github.com/daangn/go-qrcode
 
 Flags:
   -d	disable QR Code border
@@ -67,7 +67,7 @@ Usage:
 
   2. Save to file if "display" not available:
 
-       qrcode "homepage: https://github.com/skip2/go-qrcode" > out.png
+       qrcode "homepage: https://github.com/daangn/go-qrcode" > out.png
 
 ```
 ## Maximum capacity
